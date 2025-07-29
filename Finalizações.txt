@@ -1,0 +1,14 @@
+o que falta:
+
+==========Frontend================
+Integração com mercado pago
+validação dos inputs
+página de administrador
+
+
+==========Backend=================
+Middleware -> GlobalException - Feito!!!
+
+Validações de entrada
+
+Serilog
