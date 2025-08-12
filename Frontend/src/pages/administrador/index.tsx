@@ -2,7 +2,8 @@ import { LateralBar, Content, WrapperContent, ContentCardapio, TextCardapio, Con
 import { useEffect, useState } from "react"
 import { api } from "../../services/Api" 
 import Button from "../../components/Button" 
-import { IPedidoRetiradaHoje } from "./types"
+import { ICardapio, IPedidoRetiradaHoje } from "./types"
+import { Tema } from "../../components/Tema"
 
 export const Administrador = ()=>{
 
@@ -11,12 +12,30 @@ export const Administrador = ()=>{
 
     const [retiradaHoje, setRetiradaHoje] = useState<IPedidoRetiradaHoje[] | null>(null)
 
+        const [cardapio, setCardapio] = useState<ICardapio | null>(null)
+        const [mistura, setMistura] = useState<string[] | undefined>([])
+        const [guarnicao, setGuarnicao] = useState<string[] | undefined>([])
+
     useEffect(() => {
-        const listCardapio = async () => {
-            const response = await api.get(`Cardapio`)            
-        }
-        listCardapio()
+
+        api.get('Cardapio')
+            .then((res) => {
+                setCardapio(res.data)
+                //setLoading(false)
+            })
+            .catch((error) => {
+                console.error("Erro ao buscar o cardapio", error)
+            })
     }, [])
+
+    useEffect(() => {
+        if (cardapio !== null && cardapio.guarnicao.length > 0) {
+
+            setMistura(cardapio?.mistura.split(',').map(item => item.trim()))
+            setGuarnicao(cardapio.guarnicao.split(',').map(item => item.trim()))
+
+        }
+    }, [cardapio])
 
     
     const OpenCardapio = () => {
@@ -56,54 +75,73 @@ export const Administrador = ()=>{
     
     return (<>
         
-
-        
         <Container>
 
-        
-        
-        <LateralBar>teste
-                <Button onClick={OpenCardapio} title={"Cardápio"}></Button>
-                <Button onClick={OpenPedidosHoje} title={"Pedidos do Dia"}></Button>
-                
-        </LateralBar>
-            
-
-        <WrapperContent>
-            <Content>
-                <ContentCardapio isOpen={isCheckedCardapio} >
+            <LateralBar>
+                    <Button onClick={OpenCardapio} title={"Cardápio"}></Button>
+                    <Button onClick={OpenPedidosHoje} title={"Pedidos do Dia"}></Button>
                     
-                    <TextCardapio> testezinho maroto mas realmente só para teste</TextCardapio>
-                    <Button onClick={()=>handleTeste()} title={"update"}></Button>
-
-                </ContentCardapio>
-
-                <ContentPedidosHoje isOpen={isCheckedPedidosHoje}>
-                    <table>
-                        <thead>
-                                <tr>
-                                    <th>
-                                    Retirada    
-                                    </th>
-                                    <th>
-                                    Entrega    
-                                    </th>
-                                </tr>          
-                        </thead>
-                        
-                        <tbody>
-                            
-                        </tbody>    
-
-
-                    </table>
-
-
-                </ContentPedidosHoje>
+            </LateralBar>
                 
-            </Content>
+            <WrapperContent>
+                <Content>
+                        <ContentCardapio isOpen={isCheckedCardapio} >
+                            
+                            {mistura?.map((item, index) => (
+                                <div key={index}>
+                                    <TextCardapio> {item}</TextCardapio>
+                                    <Button $secondary onClick={()=>handleTeste()} title={"update"}></Button>
+                                </div>
+                            ))}
 
-        </WrapperContent>
+                            
+                            {guarnicao?.map((item, index) => (
+                                <div key={index}>
+                                    <TextCardapio> {item}</TextCardapio>
+                                    <Button $secondary onClick={()=> handleTeste()} title="update"/>
+                                </div>
+                            ))}
+
+                        </ContentCardapio>
+
+                    <ContentPedidosHoje isOpen={isCheckedPedidosHoje}>
+                        <table>
+                            <thead>
+                                    <tr>
+                                        <th>
+                                        Retirada    
+                                        </th>
+                                        
+                                        <th>
+                                        Entrega    
+                                        </th>
+                                    </tr>          
+                            </thead>
+                            
+                            <tbody>
+
+                                <tr >
+                                    <td>
+
+                                    </td>
+
+                                    <td>
+                                        
+                                    </td>
+
+                                </tr>
+                                
+                            </tbody>    
+
+
+                        </table>
+
+
+                    </ContentPedidosHoje>
+                    
+                </Content>
+
+            </WrapperContent>
 
         </Container>
               

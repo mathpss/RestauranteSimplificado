@@ -117,7 +117,7 @@ export const Confirmacao = () => {
             <div key={valorTotal}>
                 <p>Valor Total: {valorTotal}</p>
                 <p> {isChecked ?
-                    "" :
+                    "Pedido para entrega" :
                     "Pedido para retirada no local"
                 }</p>
             </div>

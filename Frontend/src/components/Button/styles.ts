@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonContainer = styled.button`
+export const ButtonContainer = styled.button<{$secondary?:boolean}>`
 
     background-color: #F2A516;
     border-radius: 22px;
@@ -8,7 +8,7 @@ export const ButtonContainer = styled.button`
     color: #fff;
     padding: 4px 8px;
     min-width: 120px;
-    width: 60% ;
+    width: ${$secondary => $secondary ? '20%' : '60%'} ;
     white-space: nowrap;
 
     margin: 12px auto;

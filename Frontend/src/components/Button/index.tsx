@@ -1,9 +1,9 @@
 import { ButtonContainer } from './styles'
 import { IButton } from './types'
 
-export default function Button({title, onClick }: IButton) {
+export default function Button({title, onClick, $secondary }: IButton) {
     return (
-      <ButtonContainer onClick={onClick}>
+      <ButtonContainer $secondary onClick={onClick}>
   
           {title}      
             

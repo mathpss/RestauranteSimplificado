@@ -3,23 +3,22 @@ import styled from "styled-components";
 export const Container = styled.main`
     background: #252526;
     width: 100vw;
-    height: 100%;
-    min-height: 100vh;
+    
     color: #fff;
     
     position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    
 `
-
-
 
 export const LateralBar = styled.div`
     min-width:130px;
     width: 20vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: max-content;
+
     border-right: solid 1px #303031ff;
     padding:4px;
     color:#ffffff;
@@ -35,14 +34,23 @@ export const Content = styled.div`
 
 export const ContentCardapio = styled.div<({isOpen:boolean})>`
     display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
-    flex-direction: row;
-
+    flex-direction: column;
+    justify-content: center;
+    
     padding: 5px;
 
     max-height: 100%;
     max-width: 100%;
-    overflow: hidden;
+
+    div{
+    display: flex;
+    flex-direction: row;
+    justify-content: safe center;
+    
+    }
+    
 `
+
 export const ContentPedidosHoje = styled.div<({isOpen:boolean})>`
     display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
     flex-direction: column;
@@ -54,14 +62,12 @@ export const ContentPedidosHoje = styled.div<({isOpen:boolean})>`
     overflow: hidden;
 `
 
-
-
 export const TextCardapio = styled.p`
         font-style: normal;
         font-weight: 700;
         font-size 32px;
         color: #fff;
-        flex-direction: row;
+        
 `
 
 export const WrapperContent = styled.div`

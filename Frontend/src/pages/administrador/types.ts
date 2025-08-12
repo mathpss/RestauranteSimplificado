@@ -13,3 +13,9 @@ export interface IPedido{
     mistura: string[],
     pedidoRetiradaId:number
 }
+
+export interface ICardapio{
+    id: number,
+    mistura: string,
+    guarnicao: string
+}
