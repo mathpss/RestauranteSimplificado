@@ -192,7 +192,7 @@ namespace backnd.Tests.Services.Tests
                 Assert.Equal(["Teste Mistura 3", "Teste Mistura 4"], firstResult.Pedidos.First().Mistura);
                 Assert.Equal("m", firstResult.Pedidos.First().Tamanho);
                 Assert.Equal(20M, firstResult.Pedidos.First().Valor);
-    
+
             }
         }
 
@@ -274,7 +274,23 @@ namespace backnd.Tests.Services.Tests
                 Assert.Equal(["Teste Mistura 3", "Teste Mistura 4"], firstResult.Pedidos.First().Mistura);
                 Assert.Equal("m", firstResult.Pedidos.First().Tamanho);
                 Assert.Equal(20M, firstResult.Pedidos.First().Valor);
-                
+
+            }
+        }
+
+        [Fact]
+        public async Task ListaPedidoEntregaHoje_QuandoVazia_DeveRretornarListaVazia()
+        {
+            var options = new DbContextOptionsBuilder<RestauranteContext>()
+                        .UseInMemoryDatabase(databaseName: "DbListaPedidoEntregaHoje_Vazia")
+                        .Options;
+
+            using (var context = new RestauranteContext(options))
+            {
+                var service = new PedidoEntregaService(context);
+                var result = await service.ListaPedidoEntregaHoje();
+
+                Assert.Empty(result);
             }
         }
     }

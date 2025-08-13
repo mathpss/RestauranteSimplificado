@@ -19,7 +19,7 @@ namespace backnd.Tests.Models.Tests
                 Tamanho = "g",
                 Valor = 22M,
                 PedidoEntregaId = null,
-                PedidoRetiradaId = 12,
+                PedidoRetiradaId = 6,
                 Mistura = ["Teste Mistura 1", "Teste Mistura 55"],
                 Guarnicao = ["Teste Guarnicao 36", "Teste Guarnicao 12"]
             };
