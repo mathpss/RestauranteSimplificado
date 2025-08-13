@@ -15,7 +15,7 @@ namespace backnd.Tests.Services.Tests
     public class CardapioServicesTests
     {
         [Fact]
-        public async Task Get_ResultadoDeveraSerOkAsync()
+        public async Task Get_ResultadoDeveraSerOk()
         {
             var cardapioExpected = new Cardapio
             {
